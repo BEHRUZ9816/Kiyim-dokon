@@ -1,0 +1,85 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.grid {
+  display: grid;
+  gap: 30px;
+  grid-template-columns: repeat(4, 1fr);
+  @include respond(xl) { grid-template-columns: repeat(3, 1fr); }
+  @include respond(md) { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  @include respond(sm) { grid-template-columns: 1fr; }
+}
+
+.card {
+  @include surface;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.2s, transform 0.2s;
+  &:hover { box-shadow: var(--shadow); }
+
+  &__media {
+    position: relative;
+    aspect-ratio: 1;
+    background: var(--media);
+    overflow: hidden;
+    img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.35s; }
+  }
+  &:hover &__media img { transform: scale(1.04); }
+
+  // like (yurakcha) tugmasi
+  &__wish {
+    position: absolute;
+    top: 10px; right: 10px;
+    z-index: 2;
+    width: 44px; height: 44px;
+    @include flex-center;
+    border-radius: 6px;
+    background: var(--float);
+    color: var(--float-fg);
+    font-size: 20px;
+    opacity: 0.92;
+    transition: transform 0.15s, color 0.15s;
+    &:hover { transform: scale(1.08); opacity: 1; }
+    &.is-active { color: var(--danger); }
+  }
+
+  // hover'da chiqadigan ko'zcha va savatcha tugmalari
+  &__actions {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    @include flex-center;
+    gap: 10px;
+    opacity: 0;
+    transition: opacity 0.2s;
+    background: rgba(2, 8, 23, 0.12);
+    button {
+      width: 50px; height: 50px;
+      @include flex-center;
+      border-radius: 6px;
+      background: var(--float);
+      color: var(--float-fg);
+      font-size: 20px;
+      transition: transform 0.15s;
+      &:hover { transform: translateY(-2px); }
+    }
+  }
+  &__media:hover &__actions { opacity: 1; }
+  @media (hover: none) { &__actions { display: none; } }
+
+  &__body { display: flex; flex-direction: column; flex: 1; padding: 20px; }
+  &__title { @include clamp-lines(1); font-size: 18px; font-weight: 600; &:hover { color: var(--primary); } }
+  &__desc { @include clamp-lines(2); color: var(--muted); margin: 6px 0 10px; font-size: 16px; min-height: 3em; }
+  &__price { font-size: 20px; font-weight: 600; margin-bottom: 16px; margin-top: auto; }
+  .btn { height: 50px; }
+
+  &--skeleton {
+    aspect-ratio: 3 / 4;
+    background: linear-gradient(90deg, var(--card), var(--accent), var(--card));
+    background-size: 200% 100%;
+    animation: shimmer 1.3s infinite linear;
+  }
+}
+
+@keyframes shimmer { to { background-position: -200% 0; } }

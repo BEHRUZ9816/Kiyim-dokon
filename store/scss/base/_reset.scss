@@ -1,0 +1,42 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  font-family: $font;
+  background: var(--bg);
+  color: var(--fg);
+  line-height: 1.5;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  transition: background 0.2s, color 0.2s;
+  &.no-scroll { overflow: hidden; }
+}
+
+.main { flex: 1; }
+img { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }
+button, input { font: inherit; color: inherit; }
+button { cursor: pointer; background: none; border: 0; }
+[hidden] { display: none !important; }
+
+.container {
+  width: 100%;
+  max-width: 1920px;
+  margin-inline: auto;
+  padding-inline: $container-pad;
+}
+
+.muted { color: var(--muted); }
+.ok { color: var(--success); font-weight: 500; }
+
+// Mahsulot rasmlari oq fonni karta fonida eritadi
+.pimg { mix-blend-mode: multiply; }
+:root[data-theme='dark'] .pimg { filter: brightness(0.92); }
+
+:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }

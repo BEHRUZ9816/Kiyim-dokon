@@ -1,0 +1,29 @@
+@use 'sass:map';
+@use 'variables' as *;
+
+// Ekran kengligi bo'yicha (max-width)
+@mixin respond($key) {
+  @media (max-width: map.get($bp, $key)) { @content; }
+}
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// Matnni N qatordan keyin "..." bilan kesadi
+@mixin clamp-lines($n) {
+  display: -webkit-box;
+  -webkit-line-clamp: $n;
+  line-clamp: $n;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+// Karta ko'rinishi
+@mixin surface {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: $radius;
+}

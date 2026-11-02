@@ -1,0 +1,9 @@
+// main.scss — barcha partial'larni birlashtiradi (@use)
+@use 'abstracts/variables';
+@use 'abstracts/mixins';
+@use 'base/reset';
+@use 'components/button';
+@use 'components/header';
+@use 'components/footer';
+@use 'components/card';
+@use 'pages/home';
